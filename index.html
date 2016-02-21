@@ -13,7 +13,6 @@
     <link href="jQueryAssets/jquery.ui.button.min.css" rel="stylesheet" type="text/css">
   <script src="jQueryAssets/jquery-1.11.1.min.js" type="text/javascript"></script>
   <script src="jQueryAssets/jquery.ui-1.10.4.button.min.js" type="text/javascript"></script>
-  <script src="jQueryAssets/jquery.printElement.min.js" type="text/javascript"></script>
   </head>
   <body>
     <section class="page-header"><img src="images/icon256.png" width="176" height="176" alt=""/>
@@ -61,25 +60,45 @@ try {
             pageTracker._trackPageview();
             } catch(err) {}
 			
+
+			
 $(function() {
-	$( "#Button1" ).button().click(function() {
-        $(".rhino").printElement();
+	$( "#Button1" ).button().click(function(event) {
+		ImagePrint('images/rhino.png');
       }); 
 });
 
 $(function() {
-	//$( "#Button2" ).button(); 
-	$( "#Button2" ).button().click(function() {
-        $(".butterfly").printElement();
+	$( "#Button2" ).button().click(function(event) {
+		ImagePrint('images/butterfly.png');
       }); 
 });
 
 $(function() {
-	$( "#Button3" ).button().click(function() {
-        $(".fish").printElement();
+	$( "#Button3" ).button().click(function(event) {
+		ImagePrint('images/fish.png');
       }); 
 });
-          </script>
+
+
+//http://www.codescratcher.com/javascript/print-image-using-javascript/#comment-762
+function ImageSourcetoPrint(source) {
+		return "<html><head><script>function step1(){\n" +
+				"setTimeout('step2()', 10);}\n" +
+				"function step2(){window.print();window.close()}\n" +
+				"</scri" + "pt></head><body onload='step1()'>\n" +
+				"<img src='" + source + "' /></body></html>";
+	}
+	
+function ImagePrint(source) {
+		//Pagelink = "about:blank";?
+		Pagelink = "Color Color Me";
+		var pwa = window.open(Pagelink, "_new");
+		pwa.document.open();
+		pwa.document.write(ImageSourcetoPrint(source));
+		pwa.document.close();
+	}
+ </script>
 
   </body>
 </html>
